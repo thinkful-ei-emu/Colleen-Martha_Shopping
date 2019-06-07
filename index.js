@@ -33,8 +33,8 @@ $('#js-shopping-list-form').submit(event => {
 
 
   //adding user text to the list 
-  $('ul').append( `    
-  <li>
+  $('ul').append( 
+    `<li>
   <span class="shopping-item">${testEntry}</span>
   <div class="shopping-item-controls">
     <button class="shopping-item-toggle">
@@ -44,11 +44,22 @@ $('#js-shopping-list-form').submit(event => {
       <span class="button-label">delete</span>
     </button>
   </div>
-</li>' `
+</li>`
   );
 
   //deleting the users text from the box
   newEntry.val('');
 
+});
+
+/**
+ * permanently remove items from the list
+ * this needs to occur at the li level so we need to select the parent of the delete button and then remove the whole thing
+ */
+$('.shopping-item-delete').click(event => {
+  event.preventDefault();
+  const deleteItem = $(event.currentTarget).closest('.shopping-item');
+  $(deleteItem).remove();
+  
 });
 
